@@ -1,0 +1,98 @@
+#%RAML 0.8
+title: RecAPI
+version: 1.0
+baseUri: /mobile/custom/rec_api
+protocols: [HTTPS]
+traits:
+  - Recipes:
+      usage: Recipes
+/recipes:
+  post:
+    displayName: Add Recipe
+    description: |
+      Add Recipe
+      
+    protocols: [HTTPS]
+    body:
+      application/json:
+        example: |
+          {
+              "name": "Widget Adapter",
+              "description": "this is a description",
+              "portion": 2
+          }
+          
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                  "id": 547,
+                  "name": "Widget Adapter",
+                  "description": "this is a description",
+                  "portion": 2
+              }
+              
+      400:
+        body:
+          application/json:
+            example: |
+              {
+                  "code": 4001,
+                  "description": "Invalid name"
+              }
+              
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "id": 547,
+                  "name": "Widget Adapter",
+                  "description": "this is a description",
+                  "portion": 2
+                },
+                {
+                  "id": 548,
+                  "name": "Widget",
+                  "description": "this is a description",
+                  "portion": 3
+                }
+              ]
+  /{name}:
+    uriParameters:
+      name:
+        displayName: name
+        type: string
+        required: true
+    get:
+      displayName: Recipes
+      description: |
+        Get All Recipes
+        
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": 547,
+                  "name": "Widget Adapter",
+                  "description": "this is a description",
+                  "portion": 2
+                }
+                
+        400:
+          body:
+            application/json:
+              example: |
+                [
+                  {
+                    "code": 4001,
+                    "message": "Invalid name"
+                  }
+                ] 

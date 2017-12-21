@@ -1,0 +1,45 @@
+
+{
+    "apiName":"rec_api",
+    "apiVersion":"1.0",
+    "apiId":"da3e7c81-459f-4f9d-a282-91c126cfeb63",
+    "baseUrl":"http://<MCS_SERVER>:<MCS_PORT>/",
+    "authorization":{
+        "mobileBackendID":"<YOUR_MOBILE_BACKEND_ID>",
+        "anonymousKey":"<MBE_ANONYMOUS_KEY>",
+        "oauth":{
+            "tokenEndpoint":"<MBE_OAUTH_TOKEN_ENDPOINT>",
+            "clientId":"<MBE_OAUTH_CLIENT_ID>",
+            "clientSecret":"<MBE_OAUTH_CLIENT_ID>"
+        }
+    },
+    "container":{
+        "oracleMobileApiName":"OracleMobileAPI",
+        "port":4000
+    },
+    "deploy":{
+        "tempDirectory":"/tmp/mcs-deploy"
+    },
+    "tests":{
+        "postRecipes":{
+            "method":"POST",
+            "resource":"/recipes",
+            "payload":{
+                "name":"Widget Adapter",
+                "description":"this is a description",
+                "portion":2
+            }
+        },
+        "getRecipes":{
+            "method":"GET",
+            "resource":"/recipes"
+        },
+        "getRecipesName":{
+            "method":"GET",
+            "resource":"/recipes/:name",
+            "uriParameters":{
+                "name":"<PARAMETER_VALUE>"
+            }
+        }
+    }
+}

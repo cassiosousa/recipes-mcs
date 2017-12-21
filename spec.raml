@@ -1,0 +1,73 @@
+#%RAML 1.0
+title: Recipes API
+baseUri: https://mobileportaldev-a166296.mobileenv.us2.oraclecloud.com:443/mobile/custom/rec_api/{1.0}
+version: v1
+protocols: [ HTTPS ] 
+mediaType: application/json
+
+/recipes:
+    get:
+        description: Collection of available recipes
+        responses:
+        200:
+            body:
+                application/json:
+                    example:
+                        [
+                            {
+                                "id": 547,
+                                "name": "Widget Adapter",
+                                "description": "this is a description",
+                                "portion": 2
+                            }
+                        ]
+    post:
+        responses:
+            201:
+                body:
+                    application/json:
+                        type: Recipe
+                        example:
+                            {
+                                "id": 547,
+                                "name": "Widget Adapter",
+                                "description": "this is a description",
+                                "portion": 2
+                            }
+            400:
+               body:
+                    application/json:
+                        type: Error[]
+                        example:
+                            [
+                               {
+                                    "code": 4001,
+                                    "message": "Invalid name"
+                                }
+                            ] 
+        
+    /{name}:
+        get:
+            description: Get by recipe name
+            responses:
+                200:
+                    body:
+                        application/json:
+                            example:
+                                {
+                                    "id": 547,
+                                    "name": "Widget Adapter",
+                                    "description": "this is a description",
+                                    "portion": 2
+                                }
+types:
+  Recipe:
+    properties:
+      id: integer
+      name: string
+      description: string
+      portation: integer
+  Error:
+    properties:
+      code: integer
+      message: string
